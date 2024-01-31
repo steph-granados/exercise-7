@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horizontal Scroll Menu</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+      }
+
+      .menu-container {
+        position: absolute;
+        bottom: 10%; /* 10% from the bottom */
+        width: 50%; /* Takes up 50% of the width */
+        left: 50%; /* Centered horizontally */
+        transform: translateX(-50%); /* Adjust horizontal centering */
+        display: flex;
+        align-items: center;
+      }
+
+      .menu {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        width: 100%;
+        mask-image: linear-gradient(
+          to right,
+          transparent,
+          black 20%,
+          black 80%,
+          transparent
+        );
+      }
+
+      .menu-item {
+        flex: 0 0 20%; /* Adjusts the width to display 5 items */
+        text-align: center;
+        color: grey;
+        font-size: 20px;
+        transition: transform 0.3s;
+      }
+
+      .menu-item:hover {
+        color: white;
+        transform: scale(1.1);
+      }
+
+      .scroll-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .left {
+        left: -30px; /* Adjusted for inner spacing */
+      }
+
+      .right {
+        right: -30px; /* Adjusted for inner spacing */
+      }
+
+      /* Optional: Hide scrollbar */
+      .menu::-webkit-scrollbar {
+        display: none;
+      }
+
+      .menu {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu-container">
+      <button class="scroll-btn left">&lt;</button>
+      <div class="menu">
+        <div class="menu-item">Example 1</div>
+        <div class="menu-item">Example 2</div>
+        <div class="menu-item">Example 3</div>
+        <div class="menu-item">Example 4</div>
+        <div class="menu-item">Example 5</div>
+        <div class="menu-item">Example 6</div>
+        <div class="menu-item">Example 7</div>
+        <div class="menu-item">Example 8</div>
+        <div class="menu-item">Example 9</div>
+        <div class="menu-item">Example 10</div>
+      </div>
+      <button class="scroll-btn right">&gt;</button>
+    </div>
+    <script>
+      document.querySelectorAll(".scroll-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          const menu = document.querySelector(".menu");
+          const itemWidth = menu.querySelector(".menu-item").offsetWidth;
+          if (button.classList.contains("left")) {
+            menu.scrollLeft -= itemWidth;
+          } else {
+            menu.scrollLeft += itemWidth;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
